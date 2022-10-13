@@ -35,7 +35,7 @@ const Login = () => {
     if (localStorage.getItem('token')) {
       navigate('/todo');
     }
-  }, []);
+  }, [navigate]);
 
   const playExpandingAnimation = () => {
     setExpanded(true);
