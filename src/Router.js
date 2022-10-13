@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/todo" element={<Todo />}></Route>
+          <Route path={"*"} element={<Login/>}></Route>
         </Routes>
       </Router>
     </Container>
