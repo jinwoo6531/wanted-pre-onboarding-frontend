@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { API } from '../../api';
@@ -16,8 +16,22 @@ const Todo = () => {
   const [modifyId, setModifyId] = useState(null);
   const [modifyIsCompleted, setModifyIsCompleted] = useState(null);
 
-  const getTodos = () => {
-    axios
+  // const getTodos = () => {
+  //   axios
+  //     .get(API.TODO, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setTodos(response.data);
+  //     })
+  //     .catch((error) => alert('LIST를 불러오는데 실패했습니다.'));
+  // };
+
+  const getTodos = useCallback(
+    () => {
+      axios
       .get(API.TODO, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -27,14 +41,17 @@ const Todo = () => {
         setTodos(response.data);
       })
       .catch((error) => alert('LIST를 불러오는데 실패했습니다.'));
-  };
+    },
+    [token],
+  )
+  
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/');
     }
     getTodos();
-  }, [navigate]);
+  }, [navigate,getTodos]);
 
   return (
     <Container>

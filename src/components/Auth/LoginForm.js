@@ -66,7 +66,7 @@ const LoginForm = () => {
         alert('로그인에 실패하였습니다.');
         return;
       });
-  }, [email, password]);
+  }, [email, password, navigate]);
 
   return (
     <BoxContainer>
